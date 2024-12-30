@@ -1,0 +1,160 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #00ff88;
+  --primary-dark: #00cc6a;
+  --secondary: #ff3366;
+  --accent: #7c3aed;
+  --background: #0a0a0a;
+  --foreground: #ffffff;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* Styles de la carte */
+.leaflet-container {
+  background: #1a1a1a !important;
+}
+
+.leaflet-tile {
+  filter: brightness(0.6) saturate(1.2) hue-rotate(180deg);
+}
+
+/* Animations des marqueurs d'avions */
+.aircraft-icon {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.aircraft-icon:hover {
+  transform: scale(1.2);
+  filter: drop-shadow(0 0 0.5rem var(--primary));
+}
+
+.aircraft-icon.tracked {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.aircraft-icon.highlighted {
+  animation: highlight 1s ease-in-out infinite alternate;
+}
+
+/* Composants UI */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 1rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.neon-border {
+  position: relative;
+}
+
+.neon-border::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
+  border-radius: inherit;
+  z-index: -1;
+  animation: borderRotate 4s linear infinite;
+}
+
+/* Animations */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+@keyframes highlight {
+  from {
+    filter: drop-shadow(0 0 0.25rem var(--secondary));
+  }
+  to {
+    filter: drop-shadow(0 0 1rem var(--secondary));
+  }
+}
+
+@keyframes borderRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Transitions fluides */
+.fade-enter {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.fade-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 300ms, transform 300ms;
+}
+
+/* Personnalisation des composants */
+.search-input {
+  @apply bg-opacity-20 border-opacity-20 focus:ring-2 focus:ring-primary transition-all duration-300;
+}
+
+.action-button {
+  @apply px-4 py-2 rounded-lg font-medium transition-all duration-300
+         hover:transform hover:scale-105 hover:shadow-lg
+         active:transform active:scale-95;
+}
+
+.primary-button {
+  @apply action-button bg-primary text-background
+         hover:bg-primary-dark;
+}
+
+.secondary-button {
+  @apply action-button bg-secondary text-foreground
+         hover:bg-opacity-90;
+}
+
+/* Scrollbar personnalisée */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-dark);
+} 

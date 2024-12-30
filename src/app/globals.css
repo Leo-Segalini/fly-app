@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+/* Map styles */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* Aircraft marker styles */
+.aircraft-popup {
+  padding: 0.5rem;
+  min-width: 200px;
+}
+
+.aircraft-popup h3 {
+  margin-bottom: 0.5rem;
+  color: #00ff00;
+}
+
+.aircraft-popup p {
+  margin: 0.25rem 0;
+  font-size: 0.875rem;
+}
+
+/* Dark theme for map */
+.leaflet-tile-pane {
+  filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7);
+}
+
+.leaflet-control-attribution {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  color: #fff !important;
+}
+
+.leaflet-control-attribution a {
+  color: #00ff00 !important;
+}
